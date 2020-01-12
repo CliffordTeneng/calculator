@@ -26,7 +26,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int firstVal = 0;
   int secondVal = 0;
   int answer = 0;
+  double answer2 =1;
   bool isOperatorChosen = false;
+  String ans = "";
 
   String _selectedValue = ""; 
   String operatorr = "";
@@ -72,7 +74,27 @@ class _MyHomePageState extends State<MyHomePage> {
       switch (operatorr) {
         case '+':
           answer += int.parse(_selectedValue); 
+          ans = answer.toString();
+          print("water");
           print(answer);
+          break;
+        case '-':
+          answer = int.parse(_selectedValue) - answer; 
+          ans = answer.toString();
+          print("water");
+          print(answer);
+          break;
+        case '/':
+          answer2 = int.parse(_selectedValue) / answer2;
+          ans = answer2.toString();
+          print("water");
+          print(answer2);
+          break;
+        case '*':
+          answer2 *= int.parse(_selectedValue);
+          ans = answer2.toString();
+          print("water");
+          print(answer2); 
           break;
         default:
       }
@@ -85,8 +107,30 @@ class _MyHomePageState extends State<MyHomePage> {
         case '+':
           operatorr = chosenOperator;
           isOperatorChosen = true;
-          answer += int.parse(_selectedValue);                  
-          print(answer);        
+          answer += int.parse(_selectedValue); 
+          print("object");
+          print(answer);           
+          break;
+        case '-':
+          operatorr = chosenOperator;
+          isOperatorChosen = true;
+          answer = int.parse(_selectedValue) - answer;  
+          print("object");
+          print(answer);          
+          break;
+        case '*':
+          operatorr = chosenOperator;
+          isOperatorChosen = true;
+          answer2 *= int.parse(_selectedValue); 
+          print("object");
+          print(answer2);           
+          break;
+        case '/':
+          operatorr = chosenOperator;
+          isOperatorChosen = true;
+          answer2 = int.parse(_selectedValue) / answer2;
+          print("object"); 
+          print(answer2);           
           break;
         default:
       }
@@ -105,34 +149,34 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              answer.toString(),
+              ans.toString(),
             ),
             SizedBox(height: 20,),
             Text(_selectedValue.toString(),),
             SizedBox(height: 20,),
             Row(children: <Widget>[
-              FlatButton(child: Text('7'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['seven']);}else{displayDigits(_numbers['seven']);} },),
-              FlatButton(child: Text('8'), onPressed: (){ displayDigits(_numbers['eight']); },),
-              FlatButton(child: Text('9'), onPressed: (){ displayDigits(_numbers['nine']); },),
+              FlatButton(child: Text('7'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['seven']);}else{ displayDigits(_numbers['seven']);} },),
+              FlatButton(child: Text('8'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['eight']);}else{ displayDigits(_numbers['eight']);} },),
+              FlatButton(child: Text('9'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['nine']);}else{ displayDigits(_numbers['nine']);} },),
               FlatButton(child: Text('del'), onPressed: clear,),
             ],),
             Row(children: <Widget>[
-              FlatButton(child: Text('4'), onPressed: (){ displayDigits(_numbers['four']); },),
-              FlatButton(child: Text('5'), onPressed: (){ displayDigits(_numbers['five']); },),
-              FlatButton(child: Text('6'), onPressed: (){ displayDigits(_numbers['six']); },),
-              FlatButton(child: Text('÷'), onPressed: (){},),
+              FlatButton(child: Text('4'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['four']);}else{ displayDigits(_numbers['four']);} },),
+              FlatButton(child: Text('5'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['five']);}else{ displayDigits(_numbers['five']);} },),
+              FlatButton(child: Text('6'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['six']);}else{ displayDigits(_numbers['six']);} },),
+              FlatButton(child: Text('÷'), onPressed: (){performOperation("/");},),
             ],),
             Row(children: <Widget>[
-              FlatButton(child: Text('1'), onPressed: (){ displayDigits(_numbers['one']); },),
-              FlatButton(child: Text('2'), onPressed: (){ displayDigits(_numbers['two']); },),
-              FlatButton(child: Text('3'), onPressed: (){ displayDigits(_numbers['three']); },),
-              FlatButton(child: Text('×'), onPressed: (){},),
+              FlatButton(child: Text('1'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['one']);}else{ displayDigits(_numbers['one']);} },),
+              FlatButton(child: Text('2'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['two']);}else{ displayDigits(_numbers['two']);} },),
+              FlatButton(child: Text('3'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['three']);}else{ displayDigits(_numbers['three']);} },),
+              FlatButton(child: Text('×'), onPressed: (){performOperation("*");},),
             ],),
             Row(children: <Widget>[
-              FlatButton(child: Text('.'), onPressed: (){ displayDigits(_numbers['dot']); },),
-              FlatButton(child: Text('0'), onPressed: (){ displayDigits(_numbers['zero']); },),
+              FlatButton(child: Text('.'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['dot']);}else{ displayDigits(_numbers['dot']);} },),
+              FlatButton(child: Text('0'), onPressed: (){ if(isOperatorChosen){ isOperatorChosen =false; clears(); displayDigits(_numbers['zero']);}else{ displayDigits(_numbers['zero']);} },),
               FlatButton(child: Text('^'), onPressed: (){},),
-              FlatButton(child: Text('-'), onPressed: (){},),
+              FlatButton(child: Text('-'), onPressed: (){performOperation("-");},),
             ],),
             Row(children: <Widget>[
               FlatButton(child: Text('('), onPressed: (){ displayDigits(_numbers['openP']); },),
